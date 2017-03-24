@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuInflater
+import com.etermax.sergiomeza.util.ErrorView
 
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun removeWait(mError: Boolean) {
         mProgressBar.visibility = View.GONE
+        mSwipeFrag.isRefreshing = false
         if(mError) {
             mLinearError.visibility = View.VISIBLE
             mRecycler.visibility = View.GONE
@@ -48,7 +50,9 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun onFailure(mErrorMessage: String) {
-        Log.e("FAIL", mErrorMessage)
+        //MOSTRAR ERROR
+        mLinearError.removeAllViews()
+        mLinearError.addView(ErrorView(this).init(mErrorMessage))
     }
 
     override fun onFlickListSuccess(mFlickrPhotos: Photos, mFromPagination: Boolean) {
@@ -96,7 +100,7 @@ class MainActivity : AppCompatActivity(), MainView {
             mRecycler.addOnScrollListener(scrollListener)
         }
 
-        mPresenter = MainPresenter(this)
+        mPresenter = MainPresenter(this, this)
         mPresenter?.getFlickPhotos()
         mSwipeFrag.setOnRefreshListener {
             mPresenter?.getFlickPhotos()

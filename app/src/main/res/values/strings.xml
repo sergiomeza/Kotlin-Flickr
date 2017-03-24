@@ -3,4 +3,5 @@
     <string name="error_empty_data">No hay datos para mostrar</string>
     <string name="search_flickr">Buscar en flickr..</string>
     <string name="list_type">Tipo de lista</string>
+    <string name="no_internet_connection">Sin conexión a internet</string>
 </resources>
