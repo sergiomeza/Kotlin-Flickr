@@ -1,9 +1,14 @@
 package com.etermax.sergiomeza.ui.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.text.Html
+import android.view.View
 
 import com.etermax.sergiomeza.R
 import com.etermax.sergiomeza.model.FlickParams
@@ -45,6 +50,18 @@ class DetailActivity : AppCompatActivity() {
             mTxtFlickDescription.text = Html.fromHtml(mPhoto?.description?._content)
             mImgFlickUser.loadFromFlickr(mPhoto?.getUserPhotoUrl()!!, true)
             mTxtFlickDate.text = mPhoto?.getDateFormated()
+
+            mImgDetail.setOnClickListener {
+                val mIntentDetail = Intent(this, ImageFullActivity::class.java)
+                mIntentDetail.putExtra(Consts.DETAIL_DATA, mPhoto)
+                val mPairImg: android.support.v4.util.Pair<View, String> =
+                        android.support.v4.util.Pair.create(this.mImgDetail,
+                                getString(R.string.transition_image))
+                val mOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                        mPairImg)
+                ActivityCompat.startActivity(this,
+                        mIntentDetail, mOptions.toBundle())
+            }
         }
     }
 }

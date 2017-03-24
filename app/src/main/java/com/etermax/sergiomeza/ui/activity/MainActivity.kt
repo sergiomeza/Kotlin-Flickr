@@ -1,6 +1,5 @@
 package com.etermax.sergiomeza.ui.activity
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -20,29 +19,19 @@ import android.view.Menu
 import android.view.MenuItem
 import com.etermax.sergiomeza.util.ErrorView
 import android.support.v7.widget.GridLayoutManager
-import android.util.Log
 import com.etermax.sergiomeza.ui.adapter.MainAdapter
 import com.etermax.sergiomeza.main.MainPresenter
 import com.etermax.sergiomeza.main.MainView
 import com.etermax.sergiomeza.util.Consts
-import android.app.Activity
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityOptionsCompat
 
-
-
-class MainActivity : AppCompatActivity(), MainView, (Photo) -> Unit {
-    var mAdapter = MainAdapter(this)
+class MainActivity : AppCompatActivity(), MainView {
+    var mAdapter = MainAdapter()
     var mPresenter: MainPresenter? = null
     private var scrollListener: EndlessRecyclerViewScrollListener? = null
     var mPage = 1
     var mFlickPhotos: MutableList<Photo> = arrayListOf()
     var mCurrentLayout = 2;
     var mMenuItem: MenuItem? = null
-
-    override fun invoke(photo: Photo) {
-
-    }
 
     override fun showWait() {
         mProgressBar.visibility = View.VISIBLE
@@ -177,10 +166,12 @@ class MainActivity : AppCompatActivity(), MainView, (Photo) -> Unit {
                     val mSearchParams = s.toString().trim().toLowerCase()
                     //DECIRLE AL PRESENTER QUE ME FILTER LA LISTA CON LOS PARAMETROS DE BUSQUEDA
                     //ENVIADOS
+                    mMenuItem?.isEnabled = false
                     mPresenter?.filterList(mAdapter.items, mSearchParams)
                 }
                 else {
                     mAdapter.items = mFlickPhotos
+                    mMenuItem?.isEnabled = true
                 }
 
                 mAdapter.notifyDataSetChanged()

@@ -2,13 +2,9 @@ package com.etermax.sergiomeza.ui.adapter
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.app.BundleCompat
 import android.support.v7.widget.RecyclerView
-import android.text.Html
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,14 +21,11 @@ import com.etermax.sergiomeza.util.Consts.Companion.TYPE_FOOTER
 import com.etermax.sergiomeza.util.Consts.Companion.TYPE_GRID
 import com.etermax.sergiomeza.util.loadFromFlickr
 import kotlin.properties.Delegates
-import android.support.v4.view.ViewCompat.getTransitionName
-
-
 
 /**
  * Created by sergiomeza on 3/23/17.
  */
-class MainAdapter(val listener: (Photo) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MainAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     /*
         BY DELEGATES ES UN METODO NATIVO DE KOTLIN PARA DELEGAR EVENTOS QUE OCURRAN DENTRO DE LA LISTA
         EN ESTE CASO SE DELEGA QUE CUANDO SE AGREGUE O SE ELIMINE ALGUN ITEM DE LA LISTA SE DISPARE
@@ -52,7 +45,7 @@ class MainAdapter(val listener: (Photo) -> Unit): RecyclerView.Adapter<RecyclerV
             }
             is ViewHolderGrid -> {
                 //SMART CAST POR KOTLIN
-                holder.bindView(items[position], listener)
+                holder.bindView(items[position])
             }
         }
     }
@@ -97,7 +90,7 @@ class MainAdapter(val listener: (Photo) -> Unit): RecyclerView.Adapter<RecyclerV
             RecyclerView.ViewHolder(itemView) {
         var mImg: ImageView =  itemView.findViewById(R.id.mImgFlickGrid) as ImageView
 
-        fun bindView(mPhoto: Photo,  listener: (Photo) -> Unit){
+        fun bindView(mPhoto: Photo){
             if(mPhoto.url_s != null && mPhoto.url_s.isNotEmpty()) {//COMPROBAR SI LA URL DESDE EL API NO ESTE VACIO
                 this.mImg.loadFromFlickr(mPhoto.url_s)
             }

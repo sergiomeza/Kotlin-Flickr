@@ -13,7 +13,7 @@ data class Photo(val id: String = "", val owner: String= "", val secret: String=
                  val farm: Int= 0, val dateupload: String= "", val ownername: String= "", val url_o: String= "",
                  val description: Description? = null, val server: String= "", val url_m: String= "",
                  val url_s: String= "", var mViewType: Int = 2, val iconserver: String ="",
-                 val iconfarm: Int = 0): Serializable {
+                 val iconfarm: Int = 0, val views: Int = 0): Serializable {
 
     fun getDateFormated(): String {
         val mDate = Date(this.dateupload.toInt() * 1000L)

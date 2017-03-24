@@ -1,0 +1,109 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="com.etermax.sergiomeza.ui.activity.ImageFullActivity">
+
+    <ImageView
+        android:id="@+id/mImgFullScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|center_vertical"
+        android:layout_gravity="center_vertical"
+        android:keepScreenOn="true"
+        android:src="@mipmap/ic_launcher"
+        android:transitionName="@string/transition_image" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:orientation="vertical"
+            tools:ignore="UselessParent"
+            android:background="#6b0a0a0a">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:padding="18dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/mTxtFlickNameUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-normal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:id="@+id/mTxtFlickTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="16.5sp"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/white"
+                android:alpha="0.6"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:id="@+id/mTxtFlickViews"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:gravity="left"
+                    android:fontFamily="sans-serif-normal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:textSize="16sp"
+                    android:textColor="#9e9e9e" />
+
+                <TextView
+                    android:id="@+id/mTxtFlickComments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/comment"
+                    android:padding="5dp"
+                    android:fontFamily="sans-serif-normal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:textSize="16sp"
+                    android:gravity="right|center_vertical"
+                    android:drawablePadding="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:drawableLeft="@drawable/ic_mode_comment_white_24dp"
+                    android:textColor="@android:color/white"
+                    android:clickable="true"
+                    android:background="?android:attr/selectableItemBackground" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>
