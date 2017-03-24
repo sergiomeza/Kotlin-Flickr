@@ -8,7 +8,7 @@ import java.io.Serializable
 data class Photo(val id: String = "", val owner: String= "", val secret: String= "", val title: String= "",
                  val farm: Int= 0, val dateupload: String= "", val ownername: String= "", val url_o: String= "",
                  val description: Description? = null, val server: String= "", val url_m: String= "",
-                 val url_s: String= "", val mViewType: Int = 2): Serializable {
+                 val url_s: String= "", var mViewType: Int = 2): Serializable {
 
     fun getDateFormated(): String {
         return this.dateupload

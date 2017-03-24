@@ -49,5 +49,10 @@ class Consts() {
     companion object {
         val API_KEY ="436f1bbafb897b0ae3a6f38a65b9a9f8"
         var URL_API = "https://api.flickr.com/services/rest/"
+
+        //LAYOUTS TYPES
+        val TYPE_GRID = 1
+        val TYPE_CARD = 2
+        val TYPE_FOOTER = 3
     }
 }

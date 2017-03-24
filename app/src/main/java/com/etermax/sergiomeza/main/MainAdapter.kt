@@ -12,9 +12,10 @@ import android.widget.TextView
 import com.etermax.sergiomeza.R
 import com.etermax.sergiomeza.model.FlickParams
 import com.etermax.sergiomeza.model.Photo
+import com.etermax.sergiomeza.util.Consts.Companion.TYPE_CARD
+import com.etermax.sergiomeza.util.Consts.Companion.TYPE_FOOTER
+import com.etermax.sergiomeza.util.Consts.Companion.TYPE_GRID
 import com.etermax.sergiomeza.util.loadFromFlickr
-import kotlinx.android.synthetic.main.flickr_item_card.*
-import java.util.logging.Handler
 import kotlin.properties.Delegates
 
 /**
@@ -29,10 +30,6 @@ class MainAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var items: MutableList<Photo> by Delegates.observable(mutableListOf(),
             { _, _, _ -> notifyDataSetChanged() })
 
-    private val TYPE_GRID = 1
-    private val TYPE_CARD = 2
-    private val TYPE_FOOTER = 3
-
     override fun getItemCount() =  items.count()
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
@@ -42,10 +39,13 @@ class MainAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 //SMART CAST POR KOTLIN
                 holder.bindView(items[position])
             }
+            is ViewHolderGrid -> {
+                //SMART CAST POR KOTLIN
+                holder.bindView(items[position])
+            }
         }
     }
 
-    //TODO: TIPO DE VIEW
     override fun getItemViewType(position: Int): Int {
         return items[position].mViewType
     }
@@ -62,6 +62,10 @@ class MainAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 val v = mInflater.inflate(R.layout.flickr_item_progress, parent, false)
                 mViewHolder = MainAdapter.ViewHolderFooter(v)
             }
+            TYPE_GRID -> {
+                val v = mInflater.inflate(R.layout.flickr_item_grid, parent, false)
+                mViewHolder = MainAdapter.ViewHolderGrid(v)
+            }
             else -> {
                 val v = mInflater.inflate(R.layout.flickr_item_card, parent, false)
                 mViewHolder = MainAdapter.ViewHolderCard(v)
@@ -71,9 +75,27 @@ class MainAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return mViewHolder
     }
 
+    //PROGRESSVIEWHOLDER
     class ViewHolderFooter(itemView: View) :
             RecyclerView.ViewHolder(itemView) {
         var mProg: ProgressBar =  itemView.findViewById(R.id.mProgressRec) as ProgressBar
+    }
+
+    //GRID VIEWHOLDER
+    class ViewHolderGrid(itemView: View) :
+            RecyclerView.ViewHolder(itemView) {
+        var mImg: ImageView =  itemView.findViewById(R.id.mImgFlickGrid) as ImageView
+
+        fun bindView(mPhoto: Photo){
+            if(mPhoto.url_s != null && mPhoto.url_s.isNotEmpty()) {//COMPROBAR SI LA URL DESDE EL API NO ESTE VACIO
+                this.mImg.loadFromFlickr(mPhoto.url_s)
+            }
+            else {
+                //UTILIZAR EL TOSTRING DEL MODELO FLICK PARAMS PARA ARMAR LA URL ESTATICA ALTERNATIVA
+                this.mImg.loadFromFlickr(FlickParams(mPhoto.farm, mPhoto.server, mPhoto.id,
+                        mPhoto.secret).toString())
+            }
+        }
     }
 
     //CARD VIEWHOLDER

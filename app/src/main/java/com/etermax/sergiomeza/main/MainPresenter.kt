@@ -5,6 +5,7 @@ import com.etermax.sergiomeza.Api
 import com.etermax.sergiomeza.R
 import com.etermax.sergiomeza.model.Photo
 import com.etermax.sergiomeza.model.ResponseApi
+import com.etermax.sergiomeza.util.Consts
 import com.etermax.sergiomeza.util.isConnectingToInternet
 import com.etermax.sergiomeza.util.retrofit
 import retrofit2.Call
@@ -20,7 +21,8 @@ class MainPresenter(val mMainView: MainView, val mContext: Context) {
 
     //DEVUELVE FOTOS DE FLICKKKR
     fun getFlickPhotos(mPage: Int = 1, mPerpage: Int = 30,
-                       mFromPagination: Boolean = false){
+                       mFromPagination: Boolean = false,
+                       mViewType: Int = Consts.TYPE_CARD){
         if(!mFromPagination){
             mMainView.showWait()
         }
@@ -33,6 +35,7 @@ class MainPresenter(val mMainView: MainView, val mContext: Context) {
                     try {
                         if (response?.body() != null) {
                             mMainView.onFlickListSuccess(response.body().photos, mFromPagination)
+                            response.body().photos.photo.forEach { it.mViewType = mViewType}
                         }
                     } catch (e: Exception) {
                         mMainView.onFailure("${e.message} .. ${e.cause}")
@@ -64,5 +67,11 @@ class MainPresenter(val mMainView: MainView, val mContext: Context) {
         }
 
         mMainView.onFilterFinish(mNewFlickrPics as MutableList<Photo>)
+    }
+
+    //CAMBIAR EL TIPO DE VISTA EN LA LISTA
+    fun changeViewType(mViewType: Int, mListPhotos: MutableList<Photo>){
+        mListPhotos.forEach { it.mViewType = mViewType }
+        mMainView.onViewTypeChanged(mListPhotos, mViewType)
     }
 }

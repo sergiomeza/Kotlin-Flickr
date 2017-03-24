@@ -18,4 +18,6 @@ interface MainView {
     fun onRefreshFinish()
 
     fun onFilterFinish(mFlickrPhotos: MutableList<Photo>)
+
+    fun onViewTypeChanged(mFlickrPhotos: MutableList<Photo>, mViewType: Int)
 }
