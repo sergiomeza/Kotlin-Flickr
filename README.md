@@ -2,6 +2,8 @@
 
 La aplicación está desarrollada en su totalidad en KOTLIN, porque KOTLIN en ves de JAVA? porqué KOTLIN me ofrece mas versatilidad a la hora de realizar tareas en las cuales java es bastante complejo de manejar, ademas de tener una sintanxis bastante moderna para los estandares del momento, kotlin nos permite realizar acciones mas facil (lambdas, delegados, metodos de extensión, observables, etc) que java. al ser un lenguaje que corre sobre JVM el resultado y el performance es diria yo que el mismo sobre la plataforma, así que no hay perdida de performance.
 
+Para la visualización de las imagenes solo se utilizaron las imagenes del api que estaban en baja calidad, para evitar el consumo de datos y recursos del sistema en dispositivos no potentes, falto visualizar la foto en alta calidad en el fullscreen de la imagen.
+
 ### JAVA ###
 
 * Si es necesario tener la version en JAVA puro de la aplicación la puedo realizar tambien
@@ -20,6 +22,7 @@ La aplicación está desarrollada en su totalidad en KOTLIN, porque KOTLIN en ve
 
 * Tests, 
 * Offline o "cachear" las publicaciones locales
+* Poner las fotos en alta resolución en el detalle fullscreen.
 
 ### Caracteristicas ###
 
