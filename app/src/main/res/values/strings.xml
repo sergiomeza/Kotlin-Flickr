@@ -4,4 +4,9 @@
     <string name="search_flickr">Buscar en flickr..</string>
     <string name="list_type">Tipo de lista</string>
     <string name="no_internet_connection">Sin conexión a internet</string>
+
+    <string name="transition_image">transition_image</string>
+    <string name="transition_image_user">transition_image_user</string>
+    <string name="transition_ownername">transition_owner</string>
+    <string name="transition_title">transition_title</string>
 </resources>

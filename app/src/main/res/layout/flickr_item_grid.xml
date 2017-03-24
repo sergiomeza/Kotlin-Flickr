@@ -6,4 +6,7 @@
     android:layout_height="130dp"
     android:src="@mipmap/ic_launcher"
     android:contentDescription="@string/app_name"
-    android:scaleType="centerCrop" />
+    android:scaleType="centerCrop"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground"
+    android:transitionName="@string/transition_image" />
