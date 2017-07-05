@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
@@ -45,10 +46,22 @@ fun Context.isConnectingToInternet(): Boolean {
 }
 
 //RETROFIT SINGLETON
-fun retrofit(mUrl: String = Consts.URL_API) = Retrofit.Builder()
-        .baseUrl(mUrl)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+fun retrofit(mUrl: String = Consts.URL_API) : Retrofit {
+    val mRetrofit = Retrofit.Builder()
+            .baseUrl(mUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+    val httpClient = OkHttpClient.Builder()
+    mRetrofit.client(httpClient.addInterceptor { chain ->
+        val mOriginal = chain.request()
+        val mUrl = mOriginal.url().newBuilder()
+                .addQueryParameter("api_key", Consts.API_KEY)
+                .build()
+        val requestBuilder = mOriginal.newBuilder()
+                .url(mUrl)
+        chain.proceed(requestBuilder.build())}.build())
+
+    return mRetrofit.build()
+}
 
 //PARSEAR FECHA AL FORMATO DESEADO
 fun Date.parseToFormat(mFormat:String):String {

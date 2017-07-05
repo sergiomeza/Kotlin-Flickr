@@ -1,6 +1,7 @@
 package com.etermax.sergiomeza.main
 
 import android.content.Context
+import android.util.Log
 import com.etermax.sergiomeza.Api
 import com.etermax.sergiomeza.R
 import com.etermax.sergiomeza.model.Photo
@@ -8,6 +9,7 @@ import com.etermax.sergiomeza.model.ResponseApi
 import com.etermax.sergiomeza.util.Consts
 import com.etermax.sergiomeza.util.isConnectingToInternet
 import com.etermax.sergiomeza.util.retrofit
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
