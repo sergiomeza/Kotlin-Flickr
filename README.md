@@ -7,4 +7,4 @@ Flick Api:
 - Retrofit
 - Parcial MVP
 
-Provide API KEY on # utils/extensions #
+Provide API KEY on utils/extensions
