@@ -60,7 +60,7 @@ fun Date.parseToFormat(mFormat:String):String {
 class Consts() {
     //COMPANION OBJECT ACTUA COMO STATIC EN JAVA
     companion object {
-        val API_KEY ="436f1bbafb897b0ae3a6f38a65b9a9f8"
+        val API_KEY ="<YOUR-API-KEY>"
         var URL_API = "https://api.flickr.com/services/rest/"
 
         //LAYOUTS TYPES
